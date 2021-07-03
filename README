@@ -1,0 +1,54 @@
+Nethunter Kernel ONLY for MI9T/redmi k20 aka. davinci
+=====================================================
+
+just run these couple commands and there you go 
+
+git clone https://github.com/AmmarXelcoder/GlitchNHK/ --depth=1 
+
+mkdir toolchains 
+
+cd toolchains
+
+git clone https://github.com/AmmarXelcoder/proton-clang 
+
+export PATH="$HOME/toolchains/proton-clang/bin:$PATH"
+
+cd 
+
+cd GlitchNHK 
+
+rm -rf out
+
+mkdir out
+
+export ARCH=arm64
+
+export SUBARCH=arm64
+
+export DTC_EXT=dtc
+
+make O=out ARCH=arm64 davinci1_defconfig
+
+make -j$(nproc --all) O=out \
+                      ARCH=arm64 \
+                      CC=clang \
+                      CROSS_COMPILE=aarch64-linux-gnu- \
+                      CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+                      DTC_EXT=$(which dtc) \
+                      LD=ld.lld 
+		      
+		      
+#you should have your Image-dtb file (compiled zImage) now 
+#how to install/flash it ? google/brain needs to be used 
+#stay legal
+#i am not responsible for any ilegal sh*t u make
+
+thanks to NetHunter Kernels : https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel for their patches that saved alot of manual work 
+thanks to acervenky for his guide on xda : https://forum.xda-developers.com/t/guide-how-to-compile-kernel-dtbo-for-redmi-k20.3973787/
+thanks to vantoman for the hard work on the kernel : https://github.com/vantoman/kernel_xiaomi_sm6150
+thanks to kdrag0n for the compiler : https://github.com/kdrag0n/proton-clang
+thanks to the telegram group Linux kernel brickers : @LinuxKernelNewbies
+thanks to the telegram group NetHunter Kernels : @nethunter_kernels
+
+If i just forgot any cridets and feel bad about it just submit an issue(ig cuz am new here)
+
