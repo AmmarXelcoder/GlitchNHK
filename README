@@ -27,7 +27,7 @@ export SUBARCH=arm64
 
 export DTC_EXT=dtc
 
-make O=out ARCH=arm64 davinci1_defconfig
+make O=out ARCH=arm64 davinci_nethunter_defconfig
 
 make -j$(nproc --all) O=out \
                       ARCH=arm64 \
